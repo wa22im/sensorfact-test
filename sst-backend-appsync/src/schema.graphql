@@ -1,0 +1,28 @@
+type Query {
+  blockEnergyConsumption(blockHash: String!): BlockEnergyReport
+  dailyEnergyConsumption(days: Int!): EnergyConsumptionHistory
+}
+
+type TransactionEnergy {
+  hash: String!
+  sizeInBytes: Int!
+  energyConsumptionKwh: Float!
+}
+
+type BlockEnergyReport {
+  blockHash: String!
+  blockHeight: Int!
+  totalTransactions: Int!
+  transactions: [TransactionEnergy!]!
+  totalEnergyConsumptionKwh: Float!
+}
+
+type DailyEnergyConsumption {
+  date: String!
+  totalEnergyConsumptionKwh: Float!
+}
+
+type EnergyConsumptionHistory {
+  days: Int!
+  dailyConsumption: [DailyEnergyConsumption!]!
+}

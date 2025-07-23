@@ -1,0 +1,13 @@
+{
+  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node20/tsconfig"],
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "exactOptionalPropertyTypes": false,
+    "verbatimModuleSyntax": false,
+    "noEmit": true,
+    "types": ["vitest/globals"],
+    "typeRoots": ["./typings", "./node_modules/@types", "./node_modules"]
+  },
+  "exclude": ["node_modules", "cdk.out", "coverage"]
+}

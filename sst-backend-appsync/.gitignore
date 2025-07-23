@@ -1,0 +1,19 @@
+# NPM
+node_modules
+npm-debug.log*
+
+# SST assets
+.sst
+
+# IDE
+.vscode
+
+# misc
+.DS_Store
+
+# tests
+coverage
+junit.xml
+
+# config
+.env

@@ -1,0 +1,44 @@
+{
+  "name": "backend-assignment-btcenergy",
+  "version": "1.0.0",
+  "description": "Sensorfact back-end developer assignment",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "serverless offline start --httpPort=4000 --host 0.0.0.0 ",
+    "compile": "tsc -p . --noEmit",
+    "test": "jest",
+    "test:watch": "jest --watch --onlyChanged",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "format": "prettier --write \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "graphql": "^16.8.0",
+    "graphql-compose": "^9.0.10",
+    "graphql-helix": "^1.13.0",
+    "graphql-request": "^6.1.0",
+    "graphql-scalars": "^1.22.0",
+    "lambda-api": "^0.11.2",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.150",
+    "@types/jest": "^29.5.0",
+    "@types/node": "18.x",
+    "@types/serverless": "^3.12.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "aws-sdk": "^2.1500.0",
+    "esbuild": "^0.19.0",
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "jest": "^29.7.0",
+    "prettier": "^3.6.2",
+    "serverless": "^3.35.0",
+    "serverless-esbuild": "^1.50.0",
+    "serverless-offline": "^13.0.0",
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.2.0"
+  }
+}
