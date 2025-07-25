@@ -7,13 +7,12 @@ provider:
   runtime: nodejs18.x
   stage: ${opt:stage, 'dev'}
   region: eu-west-1
-  lambdaHashingVersion: 20201221
-  memorySize: 256
+  memorySize: 512  
   logRetentionInDays: 14
-  timeout: 900
   environment:
     BLOCKCHAIN_API_BASE_URL: https://blockchain.info
     ENERGY_PER_BYTE_KWH: "4.56"
+    NODE_OPTIONS: "--enable-source-maps"  
    
 
 plugins:
@@ -32,5 +31,12 @@ custom:
 functions:
   graphql:
     handler: src/fn_graphql.handler
+    memorySize: 512           
+    reservedConcurrency: 100  
+    provisionedConcurrency: 2 
     events:
       - httpApi: '*'
+    environment:
+      GRAPHQL_INTROSPECTION: ${opt:stage, 'dev'}
+      GRAPHQL_PLAYGROUND: ${opt:stage, 'dev'}
+

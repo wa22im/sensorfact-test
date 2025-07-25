@@ -9,7 +9,7 @@ export function makeAppSyncStack(config: InfraConfig) {
   return function AppSyncStack({ stack }: StackContext) {
     const blockEnergyResolver = new Function(stack, "BlockEnergyResolver", {
       handler: "src/resolvers/blockEnergyResolver.handler",
-      timeout: "90 seconds",
+      reservedConcurrentExecutions: 100,
       memorySize: 512,
       environment: {
         [EnvVarNames.BLOCKCHAIN_API_BASE_URL]: config.blockChainUrl,
@@ -19,8 +19,9 @@ export function makeAppSyncStack(config: InfraConfig) {
 
     const dailyEnergyResolver = new Function(stack, "DailyEnergyResolver", {
       handler: "src/resolvers/dailyEnergyResolver.handler",
-      timeout: "300 seconds",
       memorySize: 1024,
+      reservedConcurrentExecutions: 100,
+
       environment: {
         [EnvVarNames.BLOCKCHAIN_API_BASE_URL]: config.blockChainUrl,
         [EnvVarNames.ENERGY_PER_BYTE_KWH]: config.energyPerByteKwh ,
