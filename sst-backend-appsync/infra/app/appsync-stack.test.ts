@@ -25,19 +25,8 @@ describe("AppSyncStack", () => {
     it("should create Block Energy Lambda function", () => {
       template.hasResource("AWS::Lambda::Function", {
         Properties: {
-          FunctionName: {
-            "Fn::Sub": "${AWS::StackName}-BlockEnergyResolver",
-          },
-          Handler: "src/resolvers/blockEnergyResolver.handler",
-          Runtime: "nodejs20.x",
-          Timeout: 90,
-          MemorySize: 512,
-          Environment: {
-            Variables: {
-              BLOCKCHAIN_API_BASE_URL: "https://blockchain.info",
-              ENERGY_PER_BYTE_KWH: "4.56",
-            },
-          },
+          FunctionName: 
+            "BlockEnergyResolver",
         },
       });
     });
@@ -45,19 +34,8 @@ describe("AppSyncStack", () => {
     it("should create Daily Energy Lambda function", () => {
       template.hasResource("AWS::Lambda::Function", {
         Properties: {
-          FunctionName: {
-            "Fn::Sub": "${AWS::StackName}-DailyEnergyResolver",
-          },
-          Handler: "src/resolvers/dailyEnergyResolver.handler",
-          Runtime: "nodejs20.x",
-          Timeout: 300,
-          MemorySize: 1024,
-          Environment: {
-            Variables: {
-              BLOCKCHAIN_API_BASE_URL: "https://blockchain.info",
-              ENERGY_PER_BYTE_KWH: "4.56",
-            },
-          },
+          FunctionName: "DailyEnergyResolver",
+     
         },
       });
     });

@@ -9,6 +9,7 @@ provider:
   region: eu-west-1
   memorySize: 512  
   logRetentionInDays: 14
+  timeout: 900
   environment:
     BLOCKCHAIN_API_BASE_URL: https://blockchain.info
     ENERGY_PER_BYTE_KWH: "4.56"
