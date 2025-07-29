@@ -5,7 +5,6 @@ const isCI = !!process.env["CI"];
 export default defineConfig({
   test: {
     globals: true,
-    setupFiles: "vitest.setup.ts",
     coverage: {
       enabled: isCI,
       provider: "istanbul",

@@ -5,9 +5,20 @@ import {
   BlocksDayResponseSchema,
 } from "./blockchainModels";
 import { ZodError } from "zod";
+import { LRUCache } from "lru-cache";
 
-const blockCache = new Map<string, BlockchainBlock>();
-const dayCache = new Map<number, BlocksDayResponse>();
+const blockCache = new LRUCache<string, BlockchainBlock>({
+  max: 500,
+  ttl: 1000 * 60 * 10, 
+  allowStale: false,
+
+});
+
+const dayCache = new LRUCache<number, BlocksDayResponse>({
+  max: 100,
+  ttl: 1000 * 60 * 10, 
+  allowStale: false,
+});
 
 const getBlock = async (blockHash: string): Promise<BlockchainBlock> => {
   const baseUrl =
@@ -19,8 +30,9 @@ const getBlock = async (blockHash: string): Promise<BlockchainBlock> => {
       throw new Error("Block hash is required");
     }
 
-    if (blockCache.has(blockHash)) {
-      return blockCache.get(blockHash)!;
+    const cachedBlock = blockCache.get(blockHash);
+    if (cachedBlock) {
+      return cachedBlock;
     }
 
     const url = `${baseUrl}/rawblock/${blockHash}`;
@@ -71,8 +83,9 @@ const getBlocksForDay = async (
   const timeout = 90000;
 
   try {
-    if (dayCache.has(timestamp)) {
-      return dayCache.get(timestamp)!;
+    const cachedDay = dayCache.get(timestamp);
+    if (cachedDay) {
+      return cachedDay;
     }
 
     const url = `${baseUrl}/blocks/${timestamp}?format=json`;

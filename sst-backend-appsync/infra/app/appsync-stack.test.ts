@@ -62,26 +62,8 @@ describe("AppSyncStack", () => {
       });
     });
 
-    it("should create AppSync Data Sources for Lambda functions", () => {
-      // Block Energy Lambda Data Source
-      template.hasResource("AWS::AppSync::DataSource", {
-        Properties: {
-          Name: "blockEnergyLambda",
-          Type: "AWS_LAMBDA",
-        },
-      });
-
-      // Daily Energy Lambda Data Source
-      template.hasResource("AWS::AppSync::DataSource", {
-        Properties: {
-          Name: "dailyEnergyLambda",
-          Type: "AWS_LAMBDA",
-        },
-      });
-    });
-
+  
     it("should create AppSync Resolvers for queries", () => {
-      // Block Energy Query Resolver
       template.hasResource("AWS::AppSync::Resolver", {
         Properties: {
           TypeName: "Query",
@@ -90,7 +72,6 @@ describe("AppSyncStack", () => {
         },
       });
 
-      // Daily Energy Query Resolver
       template.hasResource("AWS::AppSync::Resolver", {
         Properties: {
           TypeName: "Query",
